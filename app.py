@@ -178,29 +178,26 @@ def display():
 @app.route('/delete/<int:id>', methods=['GET', 'POST'])
 @login_required
 def delete(id):
+    note = Notes.query.get(id)
+    db.session.delete(note)
+    db.session.commit()
     if request.method == 'POST':
-        note = Notes.query.get(id)
-        try:
-            db.session.delete(note)
-            db.session.commit()
-            return render_template('display.html', m='Item deleted successfully')
-        except:
-            db.session.rollback()
-            return render_template('display.html', m='Failed to delete item')
+        flash('Item deleted successfully')
+        return redirect(url_for('display'), delete ='Item deleted successfully')
     return redirect(url_for('display'))
 
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
+@login_required
 def update(id):
     note = Notes.query.get(id)
-    if not current_user.is_authenticated:
-        return render_template('display.html')
-    elif request.method == 'POST':
+    if request.method == 'POST':
         note.item = request.form['item']
         note.quantity = request.form['quantity']
         note.category = request.form['category']
         db.session.commit()
         return render_template('shopping.html', m='Item updated successfully', note=note) 
-    return render_template('display.html', note=note)
+    return render_template('shopping.html', note=note)
+
 
 @app.route('/profile')
 @login_required
