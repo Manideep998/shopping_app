@@ -1,0 +1,90 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Registration Page
+{% endblock %}
+
+{% block content %}
+<style>
+    .heading {
+        color: #333;
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+
+    .register {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        margin-top:20px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .email {
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
+    .password {
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
+
+    input {
+        padding: 10px;
+        margin-bottom: 5px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .btn1 {
+        background-color: #333;
+        color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 16px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .btn1:hover {
+        background-color: #555;
+    }
+</style>
+
+
+<center>
+    <h1 class="heading"> Registration Page</h1>
+    <div class="register">
+        <form method="post">
+            {% if m %}
+                <p style="color: red;">{{ m }}</p>
+            {% endif %}
+            <h3> Enter First Name</h3>
+            <input type="text" name="first_name" placeholder="First Name" autocomplete="off">
+            <h3> Enter Last Name</h3>
+            <input type="text" name="last_name" placeholder="Last Name" autocomplete="off">
+            <h3> Enter Email ID</h3>
+            <input type="text" name="email" placeholder="Email" autocomplete="off">
+            <h3> Enter Password</h3>
+            <input type="password" name="password" placeholder="Password">
+            <h3> Enter Confirm Password</h3>
+            <input type="password" name="confirm_password" placeholder="Confirm Password">
+            <input class="btn1" type="submit" value="Register">
+        </form>
+    </div>
+    <p>Already had an account? <a class='btn1' href="/">Login here</a></p> 
+</center>
+
+{% endblock %}

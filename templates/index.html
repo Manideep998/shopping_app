@@ -1,0 +1,80 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+<style>
+
+
+    .heading {
+        color: #333;
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+
+    .login {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        margin-top:20px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    h3 {
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
+
+    input {
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .btn1 {
+        background-color: #333;
+        color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 16px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .btn1:hover {
+        background-color: #555;
+    }
+</style>
+
+<center>
+    <h1 class ="heading">Welcome to Shopping List App</h1>
+    <div class="login">
+        <form method='post'>
+            {% if login_warning %}
+                <p style="color: red;">{{ login_warning }}</p>
+            {% endif %}
+            <h3>Enter your Email ID</h3>
+            <input type="text" name="email" placeholder="Enter your email" autocomplete="off">
+            <h3>Enter your Password</h3>
+            <input type="password" name="password" placeholder="Enter your password">
+            <input class="btn1" type="submit" value="Login">
+        </form>
+    </div>
+    <p>Don't have an account? <a class='btn1' href="/register">Register here</a></p>
+</center>
+{% endblock %}

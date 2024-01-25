@@ -1,0 +1,87 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Display Page
+{% endblock %}
+
+{% block content %}
+<style>
+    p{
+        color: red;
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 20px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
+    }
+    h1 {
+        color: #333;
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    table {
+        width: 80%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+    .loginPopup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        margin-top:20px;
+    }
+    .warning {
+        color: red;
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 20px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+    }
+    </style>
+
+<center>
+    <h1>Shopping List </h1>
+    <p>{{ m }}</p>
+    <table>
+        <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Category</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        {% for note in notes %}
+        <tr>
+            <td>{{ note.item }}</td>
+            <td>{{ note.quantity }}</td>
+            <td>{{ note.category }}</td>
+            <td><a href="{{ url_for('update', id=note.id) }}">Edit</a></td>
+            <td><a href="{{ url_for('delete', id=note.id) }}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</center>
+
+{% endblock %}
