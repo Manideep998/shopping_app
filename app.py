@@ -86,7 +86,6 @@ def index():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-
     if request.method == "POST":
         fName = request.form.get('first_name')
         lName = request.form.get('last_name')
@@ -175,20 +174,6 @@ def display():
     notes = Notes.query.all()
     return render_template('display.html',notes = notes)
 
-@app.route('/delete_all', methods=['GET', 'POST'])
-@login_required
-def delete_all():
-    if request.method == 'POST':
-        notes = Notes.query.all()
-        for note in notes:
-            db.session.delete(note)
-        db.session.commit()
-        flash('All items deleted successfully')
-        return redirect(url_for('display'), delete ='All items deleted successfully')
-    notes = Notes.query.all()
-    return render_template('display.html', notes=notes)
-
-
 @app.route('/delete/<int:id>', methods=['GET', 'POST'])
 @login_required
 def delete(id):
@@ -221,4 +206,4 @@ def profile():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
