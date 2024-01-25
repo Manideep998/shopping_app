@@ -175,6 +175,20 @@ def display():
     notes = Notes.query.all()
     return render_template('display.html',notes = notes)
 
+@app.route('/delete_all', methods=['GET', 'POST'])
+@login_required
+def delete_all():
+    if request.method == 'POST':
+        notes = Notes.query.all()
+        for note in notes:
+            db.session.delete(note)
+        db.session.commit()
+        flash('All items deleted successfully')
+        return redirect(url_for('display'), delete ='All items deleted successfully')
+    notes = Notes.query.all()
+    return render_template('display.html', notes=notes)
+
+
 @app.route('/delete/<int:id>', methods=['GET', 'POST'])
 @login_required
 def delete(id):
@@ -202,7 +216,6 @@ def update(id):
 @app.route('/profile')
 @login_required
 def profile():
-    #print all emails and passwords from user table
     users = User.query.all()
     return render_template('profile.html', users = users)
 

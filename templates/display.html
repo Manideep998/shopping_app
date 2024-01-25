@@ -6,19 +6,27 @@
 
 {% block content %}
 <style>
-    p{
-        color: red;
-        text-align: center;
-        font-size: 20px;
-        font-weight: bold;
-        margin-top: 20px;
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
-    }
     h1 {
         color: #333;
         text-align: center;
         font-size: 30px;
         font-weight: bold;
+    }
+
+    .btn{
+        background-color: #333;
+        color: #f4f4f4;
+        padding: 4px;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 15px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+        cursor: pointer;
+        text-align: center;
+    }
+    .btn:hover{
+        background-color: #555;
     }
 
     table {
@@ -36,32 +44,36 @@
     th {
         background-color: #f2f2f2;
     }
-    .loginPopup {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        width: 300px;
-        margin-top:20px;
-    }
-    .warning {
-        color: red;
-        text-align: center;
-        font-size: 20px;
+    .btn1 {
+        background-color: #333;
+        color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
         font-weight: bold;
-        margin-top: 20px;
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-
+        font-size: 16px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+        cursor: pointer;
+        text-align: center;
     }
+
+    .btn1:hover {
+        background-color: #555;
+    }
+
+    
+    a{
+        text-decoration: none;
+        color: #f4f4f4;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
     </style>
 
 <center>
     <h1>Shopping List </h1>
+    <button class = "btn1"><a href="{{ url_for('delete_all') }}"></a> Delete All </button>
+
     <table>
         <tr>
             <th>Item</th>
@@ -75,8 +87,8 @@
             <td>{{ note.item }}</td>
             <td>{{ note.quantity }}</td>
             <td>{{ note.category }}</td>
-            <td><a href="{{ url_for('update', id=note.id) }}">Edit</a></td>
-            <td><a href="{{ url_for('delete', id=note.id) }}">Delete</a></td>
+            <td><button class ='btn'><a href="{{ url_for('update', id=note.id) }}">Edit</a></button></td>
+            <td><button class ='btn'><a href="{{ url_for('delete', id=note.id) }}">Delete</a></button></td>
         </tr>
         {% endfor %}
     </table>
