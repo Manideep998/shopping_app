@@ -192,14 +192,19 @@ def delete(id):
 @login_required
 def update(id):
     note = Notes.query.filter_by(id=id, user_id=current_user.id).first()
+
     if not note:
         return render_template('shopping.html', m='Item not found')
-    
+
     if request.method == 'POST':
-        note.item = request.form['item']
-        note.quantity = request.form['quantity']
-        note.category = request.form['category']
-        db.session.commit()
+        if note.user_id == current_user.id:  # Check if the note belongs to the current user
+            note.item = request.form['item']
+            note.quantity = request.form['quantity']
+            note.category = request.form['category']
+            db.session.commit()
+            return render_template('shopping.html', m='Item updated successfully')
+        else:
+            return render_template('shopping.html', m='You are not allowed to edit this item')
 
     return render_template('shopping.html', note=note)
 
