@@ -77,36 +77,36 @@
     }
 
     </style>
-
 <center>
     <h1>Shopping List </h1>
     {% if notes|length == 0 %}
         <p>List is empty, you can add items by clicking the add list button</p>
-    {% endif %}
-        <button class ='btn1'><a href="{{ url_for('shopping') }}">Add to List</a></button>
+    {% else %}
         <button class ='btn1'><a href="{{ url_for('delete_all') }}">Delete All</a></button>
-        {% if m %}
-            <p style="color: red;">{{ m }}</p>
-        {% endif %}
-        <table>
-            <tr>
-                <th>Item</th>
-                <th>Quantity</th>
-                <th>Category</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-            {% for note in notes %}
-            <tr>
-                <td>{{ note.item }}</td>
-                <td>{{ note.quantity }}</td>
-                <td>{{ note.category }}</td>
-                <td><button class ='btn'><a href="{{ url_for('update', id=note.id) }}">Edit</a></button></td>
-                <td><button class ='btn'><a href="{{ url_for('delete', id=note.id) }}">Delete</a></button></td>
-            </tr>
-            {% endfor %}
-        </table>
-
+    {% endif %}
+    <button class ='btn1'><a href="{{ url_for('shopping') }}">Add to List</a></button>
+    {% if m %}
+        <p style="color: red;">{{ m }}</p>
+    {% endif %}
+    <table>
+        <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Category</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        {% for note in notes %}
+        <tr>
+            <td>{{ note.item }}</td>
+            <td>{{ note.quantity }}</td>
+            <td>{{ note.category }}</td>
+            <td><button class ='btn'><a href="{{ url_for('update', id=note.id) }}">Edit</a></button></td>
+            <td><button class ='btn'><a href="{{ url_for('delete', id=note.id) }}">Delete</a></button></td>
+        </tr>
+        {% endfor %}
+    </table>
 </center>
+
 
 {% endblock %}
