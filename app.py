@@ -147,7 +147,8 @@ def shopping():
             return render_template('shopping.html', m='Please enter a quantity.')
         if not category:
             return render_template('shopping.html', m='Please enter a category.')
-        note_id = request.form.get('note_id')  # Get the ID of the note to be updated (if any)
+        
+        note_id = request.form.get('note_id') 
         if note_id:
             note = Notes.query.get(note_id)
             if note:
@@ -180,10 +181,8 @@ def delete(id):
     note = Notes.query.get(id)
     db.session.delete(note)
     db.session.commit()
-    if request.method == 'POST':
-        flash('Item deleted successfully')
-        return redirect(url_for('display'), delete ='Item deleted successfully')
     return redirect(url_for('display'))
+
 
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
 @login_required
@@ -194,8 +193,7 @@ def update(id):
         note.quantity = request.form['quantity']
         note.category = request.form['category']
         db.session.commit()
-        return render_template('shopping.html', m='Item updated successfully', note=note) 
-    return render_template('shopping.html', note=note)
+    return render_template('shopping.html', m='Item updated successfully', note=note)
 
 
 @app.route('/profile')
