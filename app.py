@@ -181,7 +181,7 @@ def delete(id):
     note = Notes.query.get(id)
     db.session.delete(note)
     db.session.commit()
-    return redirect(url_for('display'))
+    return render_template('display.html', m='Item deleted successfully')
 
 
 
@@ -195,7 +195,18 @@ def update(id):
         note.quantity = request.form['quantity']
         note.category = request.form['category']
         db.session.commit()
-    return render_template('shopping.html', m='Item updated successfully', note=note)
+    return render_template('shopping.html', note=note)
+
+
+@app.route('/delete_all', methods=['GET', 'POST'])
+@login_required
+def delete_all():
+    notes = Notes.query.all()
+    for note in notes:
+        db.session.delete(note)
+    db.session.commit()
+    return render_template('display.html', m='All items deleted successfully')
+
 
 
 @app.route('/profile')

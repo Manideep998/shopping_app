@@ -80,11 +80,14 @@
 
 <center>
     <h1>Shopping List </h1>
-    <form method="post">
-        {% if delete %}
-            <p style="color: red;">{{ delete }}</p>
+    {% if notes|length == 0 %}
+        <p>List is empty, you can add items by clicking the add list button</p>
+    {% endif %}
+        <button class ='btn1'><a href="{{ url_for('shopping') }}">Add to List</a></button>
+        <button class ='btn1'><a href="{{ url_for('delete_all') }}">Delete All</a></button>
+        {% if m %}
+            <p style="color: red;">{{ m }}</p>
         {% endif %}
-
         <table>
             <tr>
                 <th>Item</th>
@@ -103,7 +106,6 @@
             </tr>
             {% endfor %}
         </table>
-    </form>
 
 </center>
 
