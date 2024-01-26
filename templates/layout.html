@@ -54,9 +54,9 @@
         {% if not current_user.is_authenticated %}
             <a href="{{ url_for("index") }}">Home</a>
         {% endif %}
+        {% if current_user.is_authenticated %}
         <a href="{{ url_for("shopping") }}">Shopping List</a>
         <a href="{{ url_for("display") }}">Display</a>
-        {% if current_user.is_authenticated %}
         <a href="{{ url_for("logout") }}">Logout</a>
         <a href="{{ url_for("profile") }}">Profile</a>
         {% else %}
