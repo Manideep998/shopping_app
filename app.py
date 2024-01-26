@@ -184,6 +184,8 @@ def delete(id):
     return redirect(url_for('display'))
 
 
+
+
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
 @login_required
 def update(id):
